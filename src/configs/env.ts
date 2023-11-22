@@ -1,5 +1,5 @@
-import { schema } from '..schemas/env-zod'
 import 'dotenv/config'
+import { schema } from '../schemas/env-zod'
 
 const envSchema = schema
 
