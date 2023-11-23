@@ -25,7 +25,7 @@ class InMemoryUsersRepository implements UsersRepository {
     return user
   }
 
-  async create({ nome, email, senha, telefones }: Prisma.UserCreateInput) {
+  async create({ nome, email, senha }: Prisma.UserCreateInput) {
     const user = {
       id: randomUUID(),
       nome,
@@ -35,8 +35,6 @@ class InMemoryUsersRepository implements UsersRepository {
       data_atualizacao: new Date(),
       ultimo_login: null,
     }
-
-    // const phone = { id: number, numero: string, ddd: string }
 
     this.users.push(user)
 
