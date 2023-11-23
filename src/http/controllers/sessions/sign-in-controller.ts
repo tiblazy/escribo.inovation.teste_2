@@ -16,10 +16,7 @@ const signInController = async (req: FastifyRequest, rep: FastifyReply) => {
       senha,
     })
 
-    const token = await rep.jwtSign(
-      {},
-      { sign: { sub: dataUser.id, expiresIn: '30min' } },
-    )
+    const token = await rep.jwtSign({}, { sign: { sub: dataUser.id } })
 
     return rep.send({ ...dataUser, token })
   } catch (err) {
