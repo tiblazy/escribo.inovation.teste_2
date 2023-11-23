@@ -10,12 +10,14 @@ datasource db {
 model User {
   id    String @unique @default(uuid())
   nome  String
-  email String
+  email String @unique
   senha String
 
   data_criacao     DateTime  @default(now())
   data_atualizacao DateTime?
   ultimo_login     DateTime?
+
+  token String?
 
   telefones Phones[]
 
@@ -27,7 +29,7 @@ model Phones {
   numero String @db.VarChar(9)
   ddd    String @db.VarChar(2)
 
-  User   User?   @relation(fields: [userId], references: [id])
+  User   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String?
 
   @@map("telefones")

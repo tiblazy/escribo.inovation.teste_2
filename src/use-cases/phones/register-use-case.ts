@@ -9,6 +9,7 @@ class RegisterPhoneUseCase {
     { numero, ddd }: RegisterPhoneUseCaseRequestDTO,
   ): Promise<void> => {
     await this.phonesRepository.create({
+      userId,
       numero,
       ddd,
     })

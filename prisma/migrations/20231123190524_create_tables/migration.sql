@@ -6,7 +6,8 @@ CREATE TABLE "usuarios" (
     "senha" TEXT NOT NULL,
     "data_criacao" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "data_atualizacao" TIMESTAMP(3),
-    "ultimo_login" TIMESTAMP(3)
+    "ultimo_login" TIMESTAMP(3),
+    "token" TEXT
 );
 
 -- CreateTable
@@ -23,7 +24,10 @@ CREATE TABLE "telefones" (
 CREATE UNIQUE INDEX "usuarios_id_key" ON "usuarios"("id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "usuarios_email_key" ON "usuarios"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "telefones_id_key" ON "telefones"("id");
 
 -- AddForeignKey
-ALTER TABLE "telefones" ADD CONSTRAINT "telefones_userId_fkey" FOREIGN KEY ("userId") REFERENCES "usuarios"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "telefones" ADD CONSTRAINT "telefones_userId_fkey" FOREIGN KEY ("userId") REFERENCES "usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;
