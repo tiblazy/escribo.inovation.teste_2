@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client'
 
 interface PhonesRepository {
-  create(phone: Prisma.PhonesCreateInput): Promise<void>
+  create(phone: Prisma.PhonesUncheckedCreateInput): Promise<void>
 }
 
 export { PhonesRepository }

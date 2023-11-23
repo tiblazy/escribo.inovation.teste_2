@@ -13,7 +13,6 @@ describe('Sign Up Use Case', () => {
     sut = new RegisterPhoneUseCase(phonesRepository)
 
     fakePhone = makePhones()
-    
   })
 
   it('should be able to add a phone contact to a new user', async () => {
