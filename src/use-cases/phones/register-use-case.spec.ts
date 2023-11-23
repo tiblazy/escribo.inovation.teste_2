@@ -1,3 +1,4 @@
+import { makePhones } from '../../factories/phones/make-phone'
 import { InMemoryPhonesRepository } from '../../repositories/in-memory/in-memory-phones-repository'
 import { RegisterPhoneUseCase } from './register-use-case'
 
@@ -11,10 +12,8 @@ describe('Sign Up Use Case', () => {
     phonesRepository = new InMemoryPhonesRepository()
     sut = new RegisterPhoneUseCase(phonesRepository)
 
-    fakePhone = {
-      numero: '123123123',
-      ddd: '21',
-    }
+    fakePhone = makePhones()
+    
   })
 
   it('should be able to add a phone contact to a new user', async () => {

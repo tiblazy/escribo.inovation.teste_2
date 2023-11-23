@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto'
+import { makeUser } from '../../factories/users/make-user'
 import { InMemoryUsersRepository } from '../../repositories/in-memory/in-memory-users-repository'
 import { UserAlreadyExists } from '../errors/user-already-exists'
 import { SignUpUseCase } from './sign-up-use-case'
@@ -13,13 +13,7 @@ describe('Sign Up Use Case', () => {
     usersRepository = new InMemoryUsersRepository()
     sut = new SignUpUseCase(usersRepository)
 
-    fakeUser = {
-      id: randomUUID(),
-      nome: 'jose',
-      email: 'jose@email.com',
-      senha: 'jose123',
-      telefones: [{ numero: '123123231', ddd: '12' }],
-    }
+    fakeUser = makeUser()
   })
 
   it('should be able to sign up a new user', async () => {
