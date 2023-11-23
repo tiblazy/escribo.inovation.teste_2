@@ -40,6 +40,16 @@ class InMemoryUsersRepository implements UsersRepository {
 
     return user
   }
+
+  async save(user: Prisma.UserCreateInput) {
+    const userIndex = this.users.findIndex(({ id }) => id === user.id)
+
+    if (userIndex > 0) {
+      this.users[userIndex] = user
+    }
+
+    return user
+  }
 }
 
 export { InMemoryUsersRepository }

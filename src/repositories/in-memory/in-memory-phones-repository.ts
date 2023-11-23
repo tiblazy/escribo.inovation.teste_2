@@ -5,7 +5,9 @@ import { PhonesRepository } from '../interface/interface-phones-repository'
 class InMemoryPhonesRepository implements PhonesRepository {
   public phones: Phones[] = []
 
-  async create(data: Prisma.PhonesUncheckedCreateInput): Promise<void> {
+  async create(
+    data: Prisma.PhonesUncheckedCreateInput,
+  ): Promise<Phones | null> {
     const phone = {
       id: this.phones.length + 1,
       numero: data.numero,
@@ -14,6 +16,8 @@ class InMemoryPhonesRepository implements PhonesRepository {
     }
 
     this.phones.push(phone)
+
+    return phone
   }
 }
 

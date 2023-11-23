@@ -5,6 +5,7 @@ interface UsersRepository {
   findById(id: string): Promise<User | null>
 
   create(user: Prisma.UserCreateInput): Promise<User>
+  save(user: Prisma.UserCreateInput): Promise<User>
 }
 
 export { UsersRepository }

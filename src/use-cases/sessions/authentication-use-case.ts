@@ -2,9 +2,9 @@ import { compare } from 'bcryptjs'
 import {
   SessionAuthenticationUseCaseRequestDTO,
   SessionAuthenticationUseCaseResponseDTO,
-} from '../../../dtos/authentication-dto'
-import { UsersRepository } from '../../../repositories/interface/interface-users-repository'
-import { InvalidCredentials } from '../../errors/invalid-credentials'
+} from '../../dtos/authentication-dto'
+import { UsersRepository } from '../../repositories/interface/interface-users-repository'
+import { InvalidCredentials } from '../errors/invalid-credentials'
 
 class SessionAuthenticationUseCase {
   constructor(private usersRepository: UsersRepository) {}
@@ -25,7 +25,16 @@ class SessionAuthenticationUseCase {
       throw new InvalidCredentials()
     }
 
-    return { user }
+    await this.usersRepository.save({ ...user, ultimo_login: new Date() })
+
+    const dataUser = {
+      id: user.id,
+      data_criacao: user.data_criacao,
+      data_atualizacao: user.data_atualizacao,
+      ultimo_login: user.ultimo_login,
+    }
+
+    return dataUser
   }
 }
 

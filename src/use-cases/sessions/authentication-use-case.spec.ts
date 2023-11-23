@@ -1,7 +1,7 @@
 import { hash } from 'bcryptjs'
-import { makeUser } from '../../../factories/users/make-user'
-import { InMemoryUsersRepository } from '../../../repositories/in-memory/in-memory-users-repository'
-import { InvalidCredentials } from '../../errors/invalid-credentials'
+import { makeUser } from '../../factories/users/make-user'
+import { InMemoryUsersRepository } from '../../repositories/in-memory/in-memory-users-repository'
+import { InvalidCredentials } from '../errors/invalid-credentials'
 import { SessionAuthenticationUseCase } from './authentication-use-case'
 
 let usersRepository: InMemoryUsersRepository
@@ -23,12 +23,12 @@ describe('Authenticate Use Case', () => {
       senha: await hash(fakeUser.senha, 6),
     })
 
-    const { user } = await sut.execute({
+    const dataUser = await sut.execute({
       email: fakeUser.email,
       senha: '123123',
     })
 
-    expect(user.id).toEqual(expect.any(String))
+    expect(dataUser.id).toEqual(expect.any(String))
   })
 
   it('should not be able to authenticate a user', async () => {
