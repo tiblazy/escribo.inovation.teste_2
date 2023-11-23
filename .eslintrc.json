@@ -5,7 +5,7 @@
   ],
   "rules": {
     "camelcase": "off",
-    "no-useless-contructor": "off"
+    "no-useless-constructor": "off"
   },
   "env": {
     "vitest-globals/env": true
