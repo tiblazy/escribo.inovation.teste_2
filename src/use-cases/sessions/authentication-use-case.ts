@@ -5,6 +5,7 @@ import {
 } from '../../dtos/authentication-dto'
 import { UsersRepository } from '../../repositories/interface/interface-users-repository'
 import { InvalidCredentials } from '../errors/invalid-credentials'
+import { UserNotFound } from '../errors/user-not-found'
 
 class SessionAuthenticationUseCase {
   constructor(private usersRepository: UsersRepository) {}
@@ -25,16 +26,27 @@ class SessionAuthenticationUseCase {
       throw new InvalidCredentials()
     }
 
-    await this.usersRepository.save({ ...user, ultimo_login: new Date() })
+    return user
+  }
+
+  save = async (userId: string, token: string) => {
+    const user = await this.usersRepository.findById(userId)
+
+    if (!user) {
+      throw new UserNotFound()
+    }
+
+    const updatedUser = await this.usersRepository.save({ ...user, token })
 
     const dataUser = {
       id: user.id,
-      data_criacao: user.data_criacao,
-      data_atualizacao: user.data_atualizacao,
-      ultimo_login: user.ultimo_login,
+      data_criacao: updatedUser.data_criacao,
+      data_atualizacao: updatedUser.data_atualizacao,
+      ultimo_login: updatedUser.ultimo_login,
+      token: updatedUser.token,
     }
 
-    return dataUser
+    return { dataUser }
   }
 }
 

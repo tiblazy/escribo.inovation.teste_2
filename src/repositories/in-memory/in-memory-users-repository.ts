@@ -25,6 +25,16 @@ class InMemoryUsersRepository implements UsersRepository {
     return user
   }
 
+  async findByToken(data: string) {
+    const user = this.users.find(({ token }) => token === data)
+
+    if (!user) {
+      return null
+    }
+
+    return user
+  }
+
   async create({ nome, email, senha }: Prisma.UserCreateInput) {
     const user = {
       id: randomUUID(),
@@ -33,7 +43,8 @@ class InMemoryUsersRepository implements UsersRepository {
       senha,
       data_criacao: new Date(),
       data_atualizacao: new Date(),
-      ultimo_login: null,
+      ultimo_login: new Date(),
+      token: null,
     }
 
     this.users.push(user)
