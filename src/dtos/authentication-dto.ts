@@ -11,6 +11,5 @@ interface SessionAuthenticationUseCaseResponseDTO {
 
 export {
   SessionAuthenticationUseCaseRequestDTO,
-  SessionAuthenticationUseCaseResponseDTO
+  SessionAuthenticationUseCaseResponseDTO,
 }
-
