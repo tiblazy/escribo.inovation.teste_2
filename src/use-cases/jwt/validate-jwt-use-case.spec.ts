@@ -8,7 +8,6 @@ let usersRepository: InMemoryUsersRepository
 let sut: ValidateJwtUseCase
 
 let fakeUser: any
-let fakeJwt: any
 
 describe('Valid JWT', () => {
   beforeEach(async () => {
