@@ -17,6 +17,14 @@ class PrismaUsersRepository implements UsersRepository {
     return user
   }
 
+  async findByToken(token: string): Promise<User | null> {
+    const user = await prisma.user.findFirstOrThrow({
+      where: { token },
+    })
+
+    return user
+  }
+
   async create({ nome, email, senha }: Prisma.UserCreateInput) {
     const user = await prisma.user.create({
       data: {
