@@ -36,7 +36,11 @@ class SessionAuthenticationUseCase {
       throw new UserNotFound()
     }
 
-    const updatedUser = await this.usersRepository.save({ ...user, token })
+    const updatedUser = await this.usersRepository.save({
+      ...user,
+      token,
+      ultimo_login: new Date(),
+    })
 
     const dataUser = {
       id: user.id,

@@ -15,7 +15,7 @@ class ValidateJwtUseCase {
 
     const asJwtExpired = dayjs(new Date()).diff(user.ultimo_login, 'minutes')
 
-    if (asJwtExpired > 30) {
+    if (asJwtExpired >= 30) {
       throw new ValidateJwtExpired()
     }
 

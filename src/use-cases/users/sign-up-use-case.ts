@@ -18,7 +18,6 @@ class SignUpUseCase {
       nome,
       email,
       senha: await hash(senha, 6),
-      ultimo_login: new Date(),
     })
 
     return user
@@ -31,7 +30,11 @@ class SignUpUseCase {
       throw new UserNotFound()
     }
 
-    const newUser = await this.usersRepository.save({ ...user, token })
+    const newUser = await this.usersRepository.save({
+      ...user,
+      token,
+      ultimo_login: new Date(),
+    })
 
     const dataUser = {
       id: user.id,
