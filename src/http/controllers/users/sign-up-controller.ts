@@ -11,16 +11,20 @@ const signUpController = async (req: FastifyRequest, rep: FastifyReply) => {
     const signUpUseCase = makeSignUpUseCase()
     const registerPhoneUseCase = makeRegisterPhoneUseCase()
 
-    const { dataUser } = await signUpUseCase.execute({
+    const user = await signUpUseCase.execute({
       nome,
       email,
       senha,
       telefones,
     })
 
+    const token = await rep.jwtSign({}, { sign: { sub: user.id } })
+
+    const { dataUser } = await signUpUseCase.save(user.id, token)
+
     telefones.map(
       async ({ numero, ddd }) =>
-        await registerPhoneUseCase.execute(dataUser.id, { numero, ddd }),
+        await registerPhoneUseCase.execute(user.id, { numero, ddd }),
     )
 
     return rep.status(201).send(dataUser)

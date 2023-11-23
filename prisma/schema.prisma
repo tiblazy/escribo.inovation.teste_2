@@ -17,6 +17,8 @@ model User {
   data_atualizacao DateTime?
   ultimo_login     DateTime?
 
+  token String?
+
   telefones Phones[]
 
   @@map("usuarios")

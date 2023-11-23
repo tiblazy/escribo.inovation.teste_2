@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
+import { env } from '../../../configs/env'
 import { PrismaUsersRepository } from '../../../repositories/prisma/prisma-users-repository'
 import { schema } from '../../../schemas/sign-in-zod'
 import { InvalidCredentials } from '../../../use-cases/errors/invalid-credentials'
@@ -11,12 +12,17 @@ const signInController = async (req: FastifyRequest, rep: FastifyReply) => {
     const usersRepository = new PrismaUsersRepository()
     const useCase = new SessionAuthenticationUseCase(usersRepository)
 
-    const dataUser = await useCase.execute({
+    const user = await useCase.execute({
       email,
       senha,
     })
 
-    const token = await rep.jwtSign({}, { sign: { sub: dataUser.id } })
+    const token = await rep.jwtSign(
+      { secret: env.JWT_SECRET },
+      { sign: { sub: user.id } },
+    )
+
+    const { dataUser } = await useCase.save(user.id, token)
 
     return rep.send({ ...dataUser, token })
   } catch (err) {
