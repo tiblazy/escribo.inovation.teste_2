@@ -17,7 +17,7 @@ describe('Sign Up Use Case', () => {
   })
 
   it('should be able to sign up a new user', async () => {
-    await sut.execute(fakeUser)
+    console.log(await sut.execute(fakeUser))
 
     expect(usersRepository.users[0].id).toEqual(expect.any(String))
   })
