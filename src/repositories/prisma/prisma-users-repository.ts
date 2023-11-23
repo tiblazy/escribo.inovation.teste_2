@@ -28,6 +28,15 @@ class PrismaUsersRepository implements UsersRepository {
 
     return user
   }
+
+  async save(data: Prisma.UserCreateInput) {
+    const user = await prisma.user.update({
+      where: { id: data.id },
+      data,
+    })
+
+    return user
+  }
 }
 
 export { PrismaUsersRepository }

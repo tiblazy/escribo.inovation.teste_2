@@ -1,12 +1,13 @@
-import { User } from '@prisma/client'
-
 interface SessionAuthenticationUseCaseRequestDTO {
   email: string
   senha: string
 }
 
 interface SessionAuthenticationUseCaseResponseDTO {
-  user: User
+  id: string
+  data_criacao: Date
+  data_atualizacao: Date | null
+  ultimo_login: Date | null
 }
 
 export {
