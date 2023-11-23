@@ -19,7 +19,14 @@ class SignUpUseCase {
       senha: await hash(senha, 6),
     })
 
-    return { user }
+    const dataUser = {
+      id: user.id,
+      data_criacao: user.data_criacao,
+      data_atualizacao: user.data_atualizacao,
+      ultimo_login: user.ultimo_login,
+    }
+
+    return { dataUser }
   }
 }
 

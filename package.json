@@ -15,6 +15,7 @@
     "prisma:deploy": "prisma generate && prisma migrate deploy",
     "start:prod": "cross-env NODE_ENV=production node build/server.js",
     "test": "NODE_ENV=development JWT_SECRET='' DATABASE_URL='' vitest run --dir src/use-cases",
+    "prisma:studio": "prisma studio",
     "test:watch": "vitest --dir src/use-cases",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",

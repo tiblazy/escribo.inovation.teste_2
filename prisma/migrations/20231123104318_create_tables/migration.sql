@@ -23,6 +23,9 @@ CREATE TABLE "telefones" (
 CREATE UNIQUE INDEX "usuarios_id_key" ON "usuarios"("id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "usuarios_email_key" ON "usuarios"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "telefones_id_key" ON "telefones"("id");
 
 -- AddForeignKey
