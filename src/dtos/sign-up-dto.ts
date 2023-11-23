@@ -1,8 +1,10 @@
+import { RegisterPhoneUseCaseRequestDTO } from './register-phone-dto'
+
 interface SignUpUseCaseRequestDTO {
   nome: string
   email: string
   senha: string
-  telefones: Array<any>
+  telefones: Array<RegisterPhoneUseCaseRequestDTO>
 }
 
 interface SignUpUseCaseResponseDTO {
